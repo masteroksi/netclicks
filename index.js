@@ -70,6 +70,37 @@ modal.addEventListener('click', closeModal);
 modalContent.addEventListener('click', (ev) => {
     ev.stopPropagation();
 });
-
 // modal end
 
+ // change-card способ №-1
+// const changeImage = event => {
+//     const card = event.target.closest('.tv-shows__item');
+//     if (card) {
+//         // определили наши картинки
+//         const img = card.querySelector('.tv-card__img');
+//         const changeImg = img.dataset.backdrop;
+//         // поменяли местами картинки
+//         if (changeImg){
+//             img.dataset.backdrop = img.src;
+//             img.src = changeImg;
+//         }
+//
+//     // const target = event.target;
+//     // if (target.matches('.tv-card__img')){
+//     }
+// };
+
+// способ №2 деструктизация массива
+const changeImage = event => {
+    const card = event.target.closest('.tv-shows__item');
+    if (card){
+        const img = card.querySelector('.tv-card__img');
+        if (img.dataset.backdrop){
+            [img.src, img.dataset.backdrop] = [img.dataset.backdrop, img.src]
+        }
+    }
+};
+
+
+tvShowsList.addEventListener('mouseover',changeImage);
+tvShowsList.addEventListener('mouseout',changeImage);
